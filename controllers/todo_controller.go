@@ -13,6 +13,17 @@ import (
 	"time"
 )
 
+// CreateTodo godoc
+// @Summary Create a todo
+// @Description Create a new todo item
+// @Tags todos
+// @Accept json
+// @Produce json
+// @Param todo body types.Todo true "New Todo"
+// @Success 201 {object} types.Todo
+// @Failure 400 {object} HTTPError
+// @Router /todos [post]
+
 func (s *Server) CreateToDO(w http.ResponseWriter, r *http.Request) {
 	userId, _ := auth.ExtractTokenID(r)
 	responsePayload := models.Response{}
