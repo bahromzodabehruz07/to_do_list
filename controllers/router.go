@@ -14,6 +14,9 @@ func (s *Server) initializeRoutes() {
 	s.Router.HandleFunc("/api/user/getAllUsers", middelwares.SetMiddlewareJSON(s.getAllUser)).Methods("GET")
 	s.Router.HandleFunc("/api/signIn", middelwares.SetMiddlewareJSON(s.SignIn)).Methods("POST")
 	//Todos Route
-	s.Router.HandleFunc("/api/createTodo", middelwares.SetMiddlewareJSON(s.CreateToDO)).Methods("POST")
+	s.Router.HandleFunc("/api/createTodo", middelwares.SetMiddlewareAuthentication(s.CreateToDO)).Methods("POST")
+	s.Router.HandleFunc("/api/updateTodo/{id}/{status}", middelwares.SetMiddlewareAuthentication(s.UpdateToDo)).Methods("PUT")
+	s.Router.HandleFunc("/api/deleteTodo/{id}", middelwares.SetMiddlewareAuthentication(s.DeleteToDo)).Methods("DELETE")
+	s.Router.HandleFunc("/api/getAllTodo", middelwares.SetMiddlewareAuthentication(s.GetAllToDo)).Methods("GET")
 
 }
